@@ -8,10 +8,10 @@ script:
         - docker run -e CI=true aliavci/react-test npm run test -- --coverage
 
 after_success:
-        - docker build aliavci/multi-client ./client
-        - docker build aliavci/multi-nginx ./nginx
-        - docker build aliavci/multi-server ./server
-        - docker build aliavci/multi-worker ./worker
+        - docker build -t aliavci/multi-client ./client
+        - docker build -t aliavci/multi-nginx ./nginx
+        - docker build -t aliavci/multi-server ./server
+        - docker build -t aliavci/multi-worker ./worker
         - echo "$DO_PASS" | docker login -u "$DO_ID" --password-stdin
         - docker push aliavci/multi-client
         - docker push aliavci/multi-nginx
